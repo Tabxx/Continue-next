@@ -13,6 +13,11 @@ type LocalStorageTypes = {
   showTutorialCard: boolean;
   shownProfilesIntroduction: boolean;
   disableIndexing: boolean;
+  hipilotProfile: {
+    token: string,
+    email: string,
+    appid: string
+  };
 };
 
 export function getLocalStorage<T extends keyof LocalStorageTypes>(

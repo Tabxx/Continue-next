@@ -10,6 +10,7 @@ import {
 } from "../slices/sessionSlice";
 import { ThunkApiType } from "../store";
 import { callTool } from "./callTool";
+import { getLocalStorage } from "../../util/localStorage";
 
 export const streamNormalInput = createAsyncThunk<
   void,
@@ -22,6 +23,9 @@ export const streamNormalInput = createAsyncThunk<
   const toolSettings = state.ui.toolSettings;
   const streamAborter = state.session.streamAborter;
   const useTools = state.ui.useTools;
+
+  // hipilot
+  const hipilotProfile = getLocalStorage('hipilotProfile')
 
   if (!defaultModel) {
     throw new Error("Default model not defined");
@@ -43,6 +47,7 @@ export const streamNormalInput = createAsyncThunk<
             )
             .filter(Boolean)
         : undefined,
+      ...(hipilotProfile || {}),
     },
   );
 

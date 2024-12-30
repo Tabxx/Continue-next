@@ -46,6 +46,9 @@ export type ToCoreFromIdeOrWebviewProtocol = {
   ping: [string, string];
   abort: [undefined, void];
 
+  // hipilot login
+  "hipilot/login": any;
+
   // History
   "history/list": [ListHistoryOptions, SessionMetadata[]];
   "history/delete": [{ id: string }, void];

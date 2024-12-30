@@ -10,6 +10,7 @@ export const WEBVIEW_TO_CORE_PASS_THROUGH: (keyof ToCoreFromWebviewProtocol)[] =
   [
     "ping",
     "abort",
+    "hipilot/login",
     "history/list",
     "history/delete",
     "history/load",

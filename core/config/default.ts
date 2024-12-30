@@ -6,11 +6,22 @@ import {
 } from "../";
 
 export const DEFAULT_CHAT_MODEL_CONFIG: ModelDescription = {
-  model: "claude-3-5-sonnet-latest",
-  provider: "anthropic",
-  apiKey: "",
-  title: "Claude 3.5 Sonnet",
+  "model": "Qwen2.5-Coder-32B-Instruct",
+  "title": "qwen2.5",
+  "apiBase": "http://hithink.hipilot.myhexin.com/llm_l20/codeqwen25/v1",
+  "provider": "openai",
+  "contextLength": 12288,
+  "systemMessage": "你是一名资深的前端开发,你能帮助用户提供很专业的领域知识回答"
 };
+
+const HIPILOT_MODEL_CONFIG: ModelDescription = {
+  model: "hipilot",
+  contextLength: 128000,
+  title: "hipilot",
+  systemMessage: "你是一个专业的软件工程开发. 能你给出帮助和简洁的回复.",
+  provider: "hipilot"
+}
+
 
 export const DEFAULT_AUTOCOMPLETE_MODEL_CONFIG: ModelDescription = {
   title: "Codestral",
@@ -93,14 +104,14 @@ export const defaultSlashCommandsJetBrains = [
 ];
 
 export const defaultConfig: SerializedContinueConfig = {
-  models: [DEFAULT_CHAT_MODEL_CONFIG],
+  models: [DEFAULT_CHAT_MODEL_CONFIG, HIPILOT_MODEL_CONFIG],
   tabAutocompleteModel: DEFAULT_AUTOCOMPLETE_MODEL_CONFIG,
   contextProviders: defaultContextProvidersVsCode,
   slashCommands: defaultSlashCommandsVscode,
 };
 
 export const defaultConfigJetBrains: SerializedContinueConfig = {
-  models: [DEFAULT_CHAT_MODEL_CONFIG],
+  models: [DEFAULT_CHAT_MODEL_CONFIG, HIPILOT_MODEL_CONFIG],
   tabAutocompleteModel: DEFAULT_AUTOCOMPLETE_MODEL_CONFIG,
   contextProviders: defaultContextProvidersJetBrains,
   slashCommands: defaultSlashCommandsJetBrains,

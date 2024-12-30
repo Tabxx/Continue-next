@@ -46,6 +46,7 @@ import * as URI from "uri-js";
 import { SYSTEM_PROMPT_DOT_FILE } from "./config/getSystemPromptDotFile";
 import type { IMessenger, Message } from "./protocol/messenger";
 import { localPathToUri } from "./util/pathToUri";
+import { loginToGitlab } from "./gitlabLogin/login";
 
 export class Core {
   // implements IMessenger<ToCoreProtocol, FromCoreProtocol>
@@ -220,6 +221,19 @@ export class Core {
         throw new Error("ping message incorrect");
       }
       return "pong";
+    });
+
+    // gitlogin
+    on("hipilot/login", async () => {
+      console.log('core handle login')
+      const logInfo = await loginToGitlab({
+          log: console.log,
+          request: fetch,
+          // 内外网环境区分
+          env: 'in',
+          notify: () => {}
+        });
+      return logInfo;
     });
 
     // History
@@ -438,8 +452,9 @@ export class Core {
       return { done: true, content: next.value };
     }
 
-    on("llm/streamChat", (msg) =>
-      llmStreamChat(this.configHandler, this.abortedMessageIds, msg),
+    on("llm/streamChat", (msg) => {
+        return llmStreamChat(this.configHandler, this.abortedMessageIds, msg);
+      } 
     );
 
     async function* llmStreamComplete(
