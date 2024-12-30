@@ -317,6 +317,7 @@ class OpenAI extends BaseLLM {
       tool_calls: m.toolCalls,
       tool_call_id: m.toolCallId,
     })) as any;
+    console.log('[inject] openai body.messages', body.messages);
     const response = await this.fetch(this._getEndpoint("chat/completions"), {
       method: "POST",
       headers: this._getHeaders(),

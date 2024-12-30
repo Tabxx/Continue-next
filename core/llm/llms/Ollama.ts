@@ -305,6 +305,7 @@ class Ollama extends BaseLLM {
     signal: AbortSignal,
     options: CompletionOptions,
   ): AsyncGenerator<ChatMessage> {
+    console.log('[inject] ollama body.messages', this._getChatOptions(options, messages));
     const response = await this.fetch(this.getEndpoint("api/chat"), {
       method: "POST",
       headers: {

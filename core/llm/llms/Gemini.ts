@@ -168,6 +168,7 @@ class Gemini extends BaseLLM {
           systemInstruction: { parts: [{ text: this.systemMessage }] },
         }),
     };
+    console.log('[inject] gemini streamChatGemini', body);
     const response = await this.fetch(apiURL, {
       method: "POST",
       body: JSON.stringify(body),
